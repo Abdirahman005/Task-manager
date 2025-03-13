@@ -1,0 +1,117 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container */
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.balance {
+  font-size: 16px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-black {
+  background: black;
+  color: white;
+  border: none;
+}
+
+.btn-red {
+  background: red;
+  color: white;
+  border: none;
+}
+
+/* Game Cards */
+.game-card {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.game-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.game-card button {
+  margin-left: auto;
+  padding: 6px 12px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Bet History */
+.bet-history {
+  margin-top: 20px;
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.bet-history-tabs {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+.bet-history-tabs button {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.bet-history-tabs button.active {
+  border-bottom: 2px solid red;
+  font-weight: bold;
+}
+
+/* Bet Details */
+.bet-details {
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.bet-details .cashout {
+  background: green;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center;
+}
