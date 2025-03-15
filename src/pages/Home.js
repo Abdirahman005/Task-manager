@@ -1,73 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "../styles/styles.css"; 
-import taskManagerImage from "../assets/team-work.jpg"; // Ensure the file exists in /src/assets/
+import { useNavigate } from "react-router-dom";
+import "../styles/Home.css"; 
+import teamWorkImage from "../assets/team-work.jpg"; // Corrected import
 
 const Home = () => {
-    return (
-        <div style={styles.container}>
-            <h1 style={styles.title}>Welcome to Task Manager</h1>
-            <p style={styles.subtitle}>Manage your tasks efficiently and stay productive.</p>
+  const navigate = useNavigate();
 
-            {/* Get Started Button */}
-            <Link to="/auth">
-                <button style={styles.button}>Get Started</button>
-            </Link>
+  return (
+    <div className="home-container">
+      {/* Hero Section */}
+      <div className="hero">
+        <img src={teamWorkImage} alt="Task Management" className="home-image" />
+        <h1 className="home-title">Welcome to Task Manager</h1>
+        <p className="home-description">
+          Organize your tasks, stay productive, and never miss a deadline.
+        </p>
 
-            {/* Teamwork Image */}
-            <img src={taskManagerImage} alt="Teamwork" style={styles.image} />
+        {/* Get Started Button */}
+        <button className="get-started-btn" onClick={() => navigate("/auth")}>
+          Get Started
+        </button>
+      </div>
 
-            {/* Footer Section */}
-            <footer style={styles.footer}>
-                &copy; {new Date().getFullYear()} Task Manager by Abdirahman Muktar. All rights reserved.
-            </footer>
-        </div>
-    );
-};
-
-// ✅ Inline Styles Object
-const styles = {
-    container: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        height: "100vh",
-        backgroundColor: "#f8f9fa",
-    },
-    title: {
-        fontSize: "2rem",
-        fontWeight: "bold",
-        marginBottom: "10px",
-        color: "#333",
-    },
-    subtitle: {
-        fontSize: "1.2rem",
-        color: "#666",
-        marginBottom: "20px",
-    },
-    button: {
-        padding: "10px 20px",
-        fontSize: "1rem",
-        color: "white",
-        backgroundColor: "#007bff",
-        border: "none",
-        borderRadius: "5px",
-        cursor: "pointer",
-        transition: "0.3s",
-    },
-    image: {
-        width: "300px", // Adjust image size
-        height: "auto",
-        marginTop: "20px",
-        borderRadius: "10px",
-    },
-    footer: {
-        marginTop: "30px",
-        fontSize: "0.9rem",
-        color: "#555",
-    },
+      {/* Footer with Copyright */}
+      <footer className="home-footer">
+        <p>© {new Date().getFullYear()} Task Manager. All rights reserved.</p>
+      </footer>
+    </div>
+  );
 };
 
 export default Home;
