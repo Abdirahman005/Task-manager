@@ -1,5 +1,5 @@
 ## Task Management Application 
-A React-based task management application that allows users to create, manage, and track tasks with features like task filtering, deletion, completion toggling, and overdue task identification.
+This is task management application that allows users to create, manage, and track tasks with features like task filtering, deletion, completion toggling, and overdue task identification.
 ## Author
 Abdirahman005 (Github username)
 
