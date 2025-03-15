@@ -1,36 +1,29 @@
-import { useContext } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
-import "../styles/styles.css"; 
 
 const Navbar = () => {
-    const { user, logout } = useContext(AuthContext);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    const handleLogout = () => {
-        logout();
-        navigate("/");
-    };
+  const handleLogout = () => {
+    localStorage.removeItem("currentUser");
+    alert("Logged out successfully!");
+    navigate("/auth");
+  };
 
-    return (
-        <nav className="navbar">
-            <h2>Task Manager</h2>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                {user ? (
-                    <>
-                        <li><Link to="/dashboard">Dashboard</Link></li>
-                        <li><button onClick={handleLogout}>Logout</button></li>
-                    </>
-                ) : (
-                    <>
-                        <li><Link to="/login">Login</Link></li>
-                        <li><Link to="/register">Register</Link></li>
-                    </>
-                )}
-            </ul>
-        </nav>
-    );
+  return (
+    <nav style={{ padding: "10px", background: "#007bff", color: "white" }}>
+      <Link to="/" style={{ marginRight: "10px", color: "white" }}>Home</Link>
+      {currentUser ? (
+        <>
+          <Link to="/dashboard" style={{ marginRight: "10px", color: "white" }}>Dashboard</Link>
+          <button onClick={handleLogout} style={{ background: "red", color: "white" }}>Logout</button>
+        </>
+      ) : (
+        <Link to="/auth" style={{ color: "white" }}>Login</Link>
+      )}
+    </nav>
+  );
 };
 
 export default Navbar;

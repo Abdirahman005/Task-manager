@@ -1,0 +1,136 @@
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: center;  /* Centering the navbar */
+    align-items: center;
+    background-color: blue;
+    padding: 10px;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+  }
+  
+  .logout-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 15px;
+    cursor: pointer;
+  }
+  
+  /* Task Manager Header */
+  .task-manager-header {
+    background-color: green;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Content Section */
+  .content {
+    max-width: 800px;
+    margin: auto;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  /* Add Task Section */
+  .add-task {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .add-task input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+  }
+  
+  .add-task button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  /* Filter Buttons with Spacing */
+  .filter-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Increased spacing */
+    margin: 20px 0;
+  }
+  
+  .filter-section button {
+    background-color: gray;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+  
+  .filter-section button:hover {
+    background-color: black;
+  }
+  
+  /* Task List */
+  .task-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .task-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid gray; /* Default border for pending tasks */
+  }
+  
+  .task-item.completed {
+    border-left: 5px solid green; /* Green border for completed tasks */
+  }
+  
+  .task-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .task-actions button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .complete-btn {
+    background-color: green;
+    color: white;
+  }
+  
+  .complete-btn.completed {
+    background-color: gray;
+  }
+  
+  .delete-btn {
+    background-color: red;
+    color: white;
+  }
+  

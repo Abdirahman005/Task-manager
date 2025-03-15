@@ -1,71 +1,167 @@
-import { useEffect, useState, useContext } from "react";
-import { getTasks, createTask, deleteTask } from "../api/tasks";
-import AuthContext from "../context/AuthContext";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Dashboard.css";
 
 const Dashboard = () => {
-    const [tasks, setTasks] = useState([]);
-    const [newTask, setNewTask] = useState({ title: "", description: "" });
-    const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [tasks, setTasks] = useState([]);
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
-    useEffect(() => {
-        const fetchTasks = async () => {
-            const data = await getTasks();
-            setTasks(data);
-        };
-        fetchTasks();
-    }, []);
+  // Load tasks from local storage when component mounts
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    setTasks(storedTasks);
+    setFilteredTasks(storedTasks);
+  }, []);
 
-    const handleCreateTask = async (e) => {
-        e.preventDefault();
-        if (!newTask.title) return;
-        
-        const createdTask = await createTask(newTask);
-        setTasks([...tasks, createdTask]);
-        setNewTask({ title: "", description: "" });
+  // Function to add a task
+  const addTask = () => {
+    if (!title.trim() || !description.trim() || !dueDate) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    const newTask = {
+      title,
+      description,
+      dueDate,
+      status: "Pending",
     };
 
-    const handleDeleteTask = async (taskId) => {
-        await deleteTask(taskId);
-        setTasks(tasks.filter(task => task.id !== taskId));
-    };
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+    setFilteredTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
 
-    return (
-        <div className="dashboard-container">
-            <h2>Welcome, {user?.name}!</h2>
+    // Clear input fields
+    setTitle("");
+    setDescription("");
+    setDueDate("");
+  };
 
-            {/* Create Task Form */}
-            <form onSubmit={handleCreateTask}>
-                <input
-                    type="text"
-                    placeholder="Task Title"
-                    value={newTask.title}
-                    onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-                    required
-                />
-                <textarea
-                    placeholder="Task Description"
-                    value={newTask.description}
-                    onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-                ></textarea>
-                <button type="submit">Add Task</button>
-            </form>
-
-            {/* Task List */}
-            <h3>Your Tasks</h3>
-            <ul>
-                {tasks.length > 0 ? (
-                    tasks.map(task => (
-                        <li key={task.id}>
-                            <strong>{task.title}</strong> - {task.description}
-                            <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
-                        </li>
-                    ))
-                ) : (
-                    <p>No tasks found. Start adding some!</p>
-                )}
-            </ul>
-        </div>
+  // Function to mark a task as complete
+  const markTaskAsComplete = (index) => {
+    const updatedTasks = tasks.map((task, i) =>
+      i === index ? { ...task, status: "Completed" } : task
     );
+    setTasks(updatedTasks);
+    setFilteredTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  };
+
+  // Function to delete a task
+  const deleteTask = (index) => {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+    setFilteredTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  };
+
+  // Function to filter overdue tasks
+  const filterOverdueTasks = () => {
+    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    const overdueTasks = tasks.filter(
+      (task) => task.status !== "Completed" && task.dueDate < today
+    );
+    setFilteredTasks(overdueTasks);
+  };
+
+  return (
+    <div className="dashboard-container">
+      {/* Navbar */}
+      <nav className="navbar">
+        <Link to="/">Home</Link>
+        <Link to="/dashboard">Dashboard</Link>
+        <button className="logout-btn" onClick={() => navigate("/auth")}>
+          Logout
+        </button>
+      </nav>
+
+      {/* Task Manager Header */}
+      <div className="task-manager-header">Task Manager</div>
+
+      {/* Main Content */}
+      <div className="content">
+        <h2>Welcome to My Task Management Application!</h2>
+
+        {/* Add Task Section */}
+        <div className="add-task">
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <input
+            type="date"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+          />
+          <button onClick={addTask}>Add Task</button>
+        </div>
+
+        {/* Filter Tasks */}
+        <div className="filter-section">
+          <h3>Filter Tasks</h3>
+          <button onClick={() => setFilteredTasks(tasks)}>All</button>
+          <button
+            onClick={() =>
+              setFilteredTasks(tasks.filter((task) => task.status === "Completed"))
+            }
+          >
+            Completed
+          </button>
+          <button
+            onClick={() =>
+              setFilteredTasks(tasks.filter((task) => task.status === "Pending"))
+            }
+          >
+            Pending
+          </button>
+          <button onClick={filterOverdueTasks}>Overdue</button>
+        </div>
+
+        {/* Task List */}
+        <h3>Tasks</h3>
+        {filteredTasks.length === 0 ? (
+          <p>No tasks available.</p>
+        ) : (
+          <ul className="task-list">
+            {filteredTasks.map((task, index) => (
+              <li key={index} className="task-item">
+                <div className="task-info">
+                  <strong>{task.title}</strong>
+                  <p>{task.description}</p>
+                  <p>Due: {task.dueDate}</p>
+                  <p>Status: {task.status}</p>
+                </div>
+                <div className="task-actions">
+                  <button
+                    className={`complete-btn ${task.status === "Completed" ? "completed" : ""}`}
+                    onClick={() => markTaskAsComplete(index)}
+                  >
+                    {task.status === "Completed" ? "Completed" : "Complete"}
+                  </button>
+                  <button className="delete-btn" onClick={() => deleteTask(index)}>
+                    Delete
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;
