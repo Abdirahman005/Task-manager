@@ -24,7 +24,7 @@ const Home = () => {
 
       {/* Footer with Copyright */}
       <footer className="home-footer">
-        <p>© {new Date().getFullYear()} Task Manager. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Task Manager Abdirahman muktar. All rights reserved.</p>
       </footer>
     </div>
   );
