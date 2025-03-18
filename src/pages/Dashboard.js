@@ -10,14 +10,12 @@ const Dashboard = () => {
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
 
-  // Load tasks from local storage when component mounts
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     setTasks(storedTasks);
     setFilteredTasks(storedTasks);
   }, []);
 
-  // Function to add a task
   const addTask = () => {
     if (!title.trim() || !description.trim() || !dueDate) {
       alert("Please fill in all fields.");
@@ -36,13 +34,11 @@ const Dashboard = () => {
     setFilteredTasks(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
 
-    // Clear input fields
     setTitle("");
     setDescription("");
     setDueDate("");
   };
 
-  // Function to mark a task as complete
   const markTaskAsComplete = (index) => {
     const updatedTasks = tasks.map((task, i) =>
       i === index ? { ...task, status: "Completed" } : task
@@ -52,7 +48,6 @@ const Dashboard = () => {
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
-  // Function to delete a task
   const deleteTask = (index) => {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
@@ -60,7 +55,6 @@ const Dashboard = () => {
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
-  // Function to filter overdue tasks
   const filterOverdueTasks = () => {
     const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
     const overdueTasks = tasks.filter(
@@ -80,14 +74,11 @@ const Dashboard = () => {
         </button>
       </nav>
 
-      {/* Task Manager Header */}
       <div className="task-manager-header">Task Manager</div>
 
-      {/* Main Content */}
       <div className="content">
         <h2>Welcome to My Task Management Application!</h2>
 
-        {/* Add Task Section */}
         <div className="add-task">
           <input
             type="text"
@@ -109,7 +100,6 @@ const Dashboard = () => {
           <button onClick={addTask}>Add Task</button>
         </div>
 
-        {/* Filter Tasks */}
         <div className="filter-section">
           <h3>Filter Tasks</h3>
           <button onClick={() => setFilteredTasks(tasks)}>All</button>
@@ -129,8 +119,6 @@ const Dashboard = () => {
           </button>
           <button onClick={filterOverdueTasks}>Overdue</button>
         </div>
-
-        {/* Task List */}
         <h3>Tasks</h3>
         {filteredTasks.length === 0 ? (
           <p>No tasks available.</p>

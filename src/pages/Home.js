@@ -8,7 +8,6 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Hero Section */}
       <div className="hero">
         <img src={teamWorkImage} alt="Task Management" className="home-image" />
         <h1 className="home-title">Welcome to Task Manager</h1>
@@ -16,13 +15,11 @@ const Home = () => {
           Organize your tasks, stay productive, and never miss a deadline.
         </p>
 
-        {/* Get Started Button */}
         <button className="get-started-btn" onClick={() => navigate("/auth")}>
           Get Started
         </button>
       </div>
 
-      {/* Footer with Copyright */}
       <footer className="home-footer">
         <p>© {new Date().getFullYear()} Task Manager Abdirahman muktar. All rights reserved.</p>
       </footer>

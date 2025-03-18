@@ -13,7 +13,6 @@ const AuthForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     setError(null);
@@ -22,21 +21,17 @@ const AuthForm = () => {
       const users = JSON.parse(localStorage.getItem("users")) || [];
 
       if (isRegister) {
-        // Check if user already exists
         const userExists = users.some((user) => user.email === formData.email);
 
         if (userExists) {
           throw new Error("User already exists! Please log in.");
         }
-
-        // Save new user
         users.push(formData);
         localStorage.setItem("users", JSON.stringify(users));
 
         alert("Registration successful! You can now log in.");
         setIsRegister(false); // Switch to login mode
       } else {
-        // Simulate login
         const validUser = users.find(
           (user) =>
             user.email === formData.email && user.password === formData.password
