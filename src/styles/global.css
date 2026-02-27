@@ -1,8 +1,6 @@
 /* ——————————————————————————
    BASE RESET + UTILITY STYLES
 —————————————————————————— */
-
-/* Make sure everything scales */
 *,
 *::before,
 *::after {
@@ -17,6 +15,12 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.5;
+}
+
 /* Make images responsive */
 img {
   max-width: 100%;
@@ -24,36 +28,23 @@ img {
   display: block;
 }
 
-/* Nice default background & text */
-body {
-  background: #f9f9f9;
-  color: #333;
-  line-height: 1.5;
-}
-
-/* Default button style */
+/* Buttons */
 button {
   padding: 0.6rem 1rem;
   font-size: 1rem;
   border: none;
+  border-radius: 5px;
   background: #0066ff;
   color: #fff;
-  border-radius: 4px;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
 button:hover {
   background: #0051cc;
 }
 
-/* Utility spacing */
-.container {
-  width: 95%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Form Inputs */
+/* Forms */
 input,
 select,
 textarea {
@@ -63,27 +54,20 @@ textarea {
   border-radius: 4px;
 }
 
-/* ——————————————————————————
-   RESPONSIVE TYPOGRAPHY
-—————————————————————————— */
-
+/* Typography */
 h1, h2, h3, h4, h5 {
   margin-bottom: 0.75rem;
   font-weight: bold;
 }
 
-/* Scale text on smaller screens */
-@media (max-width: 768px) {
-  html {
-    font-size: 14px;
-  }
+/* Containers */
+.container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* ——————————————————————————
-   FLEX CONTAINER HELPERS
-—————————————————————————— */
-
-/* Center items in a row */
+/* Flex / Stack */
 .flex {
   display: flex;
   align-items: center;
@@ -91,7 +75,6 @@ h1, h2, h3, h4, h5 {
   gap: 1rem;
 }
 
-/* Stack items vertically */
 .stack {
   display: flex;
   flex-direction: column;
@@ -99,20 +82,63 @@ h1, h2, h3, h4, h5 {
 }
 
 /* ——————————————————————————
-   BREAKPOINTS
+   DASHBOARD SPECIFIC STYLES
+—————————————————————————— */
+.dashboard {
+  padding: 2rem 1rem;
+}
+
+.dashboard-cards {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  word-wrap: break-word;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Dashboard headings */
+.dashboard h2, .dashboard h3 {
+  margin-bottom: 1rem;
+}
+
+/* ——————————————————————————
+   RESPONSIVE BREAKPOINTS
 —————————————————————————— */
 
-/* Phone / small device */
-@media (max-width: 640px) {
+/* Tablet */
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+  button {
+    font-size: 0.95rem;
+  }
+}
 
-  /* Make main nav stack vertically if it exists */
+/* Mobile / Small Devices */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+
   nav,
   .navbar {
     flex-direction: column;
     align-items: stretch;
   }
 
-  /* Make all content full width */
   main,
   section,
   .card,
@@ -122,16 +148,17 @@ h1, h2, h3, h4, h5 {
     padding: 0.75rem;
   }
 
-  /* Larger buttons on mobile to improve tap targets */
+  .dashboard-cards {
+    grid-template-columns: 1fr; /* Stack cards vertically */
+    gap: 1rem;
+  }
+
   button {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     padding: 0.8rem;
   }
-}
 
-/* Tablet size */
-@media (max-width: 1024px) {
-  .container {
-    width: 90%;
+  .card {
+    padding: 0.75rem;
   }
 }
