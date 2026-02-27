@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import AuthForm from "./pages/AuthForm";
 import PrivateRoute from "./components/PrivateRoute";
+import './styles/global.css';
 
 const App = () => {
   return (

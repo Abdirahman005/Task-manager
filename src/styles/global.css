@@ -1,0 +1,137 @@
+/* ——————————————————————————
+   BASE RESET + UTILITY STYLES
+—————————————————————————— */
+
+/* Make sure everything scales */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+/* Make images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Nice default background & text */
+body {
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Default button style */
+button {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: none;
+  background: #0066ff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0051cc;
+}
+
+/* Utility spacing */
+.container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Form Inputs */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* ——————————————————————————
+   RESPONSIVE TYPOGRAPHY
+—————————————————————————— */
+
+h1, h2, h3, h4, h5 {
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+}
+
+/* Scale text on smaller screens */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* ——————————————————————————
+   FLEX CONTAINER HELPERS
+—————————————————————————— */
+
+/* Center items in a row */
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Stack items vertically */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ——————————————————————————
+   BREAKPOINTS
+—————————————————————————— */
+
+/* Phone / small device */
+@media (max-width: 640px) {
+
+  /* Make main nav stack vertically if it exists */
+  nav,
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Make all content full width */
+  main,
+  section,
+  .card,
+  .task-list,
+  .form-section {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  /* Larger buttons on mobile to improve tap targets */
+  button {
+    font-size: 1.1rem;
+    padding: 0.8rem;
+  }
+}
+
+/* Tablet size */
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+}
